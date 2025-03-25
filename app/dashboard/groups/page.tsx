@@ -1,12 +1,11 @@
 "use client";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import { toast } from "sonner";
-import { DataTableGroups } from "@/components/data-table-groups";
 import { Button } from "@/components/ui/button";
-import { IconPlus } from "@tabler/icons-react";
-import Loading from "./loading";
-import { fetchUser, fetchUserGroups } from "@/utils/api";
+import { DataTableGroups } from "@/components/data-table-groups";
+import { toast } from "sonner";
+import Loading from "../loading";
+import { fetchUserGroups, fetchUser } from "@/utils/api";
 
 interface User {
   id: string;
@@ -14,7 +13,7 @@ interface User {
   email: string;
 }
 
-export default function Page() {
+export default function GroupsPage() {
   const [loading, setLoading] = useState(true);
   const [groups, setGroups] = useState([]);
   const [currentUser, setCurrentUser] = useState<User | null>(null);
@@ -37,18 +36,20 @@ export default function Page() {
     };
 
     loadUserAndGroups();
-  }, [router]);
+  }, []);
 
   if (loading || !currentUser) {
     return <Loading />;
   }
 
   return (
-    <div className="flex flex-1 flex-col p-4">
-      <div className="flex justify-between items-center mb-4">
+    <div className="flex flex-col gap-4">
+      <div className="flex justify-between items-center">
         <h1 className="text-2xl font-bold">Groups</h1>
-        <Button onClick={() => router.push("/dashboard/groups/create")}>
-          <IconPlus className="mr-2" />
+        <Button
+          variant="ghost"
+          onClick={() => router.push("/dashboard/groups/create")}
+        >
           Create New Group
         </Button>
       </div>
