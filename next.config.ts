@@ -5,7 +5,7 @@ const nextConfig: NextConfig = {
     return [
       {
         source: '/api/:path*',
-        destination: 'https://plateforme-collaborative-backend.vercel.app/:path*',
+        destination: 'https://plateforme-collaborative-backend.vercel.app/:path*',//localhost:3001
       },
     ];
   },
